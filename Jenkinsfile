@@ -34,25 +34,73 @@ stage('GIT CLONE') {
   
 
   //Terraform
-   stage('TF INICIAR') {
-         steps {
-           sh 'terraform init -reconfigure'
-                
-          }
-     }
+/// stage('TF INICIAR') {
+     //    steps {
+     //      sh 'terraform init -reconfigure'
+         
+    //      }
+    // }
 
-    stage('TF FMT') {
-         steps {
-              sh 'terraform fmt'
+  ///  stage('TF FMT') {
+        // steps {
+        //      sh 'terraform fmt'
                 
-          }
-       }
+        //  }
+      // }
 
-      stage('TF Apply') {
-           steps {
-        sh 'terraform apply -auto-approve'
-           }
+     // stage('TF Apply') {
+      //     steps {
+     //   sh 'terraform apply -auto-approve'
+    //       }
+   // }
+    //    }
+
+//}
+
+
+///Docker STEPS
+    stage('Docker Build') {
+      steps {
+        sh 'docker build -t brunosantos88/conversaotemperatura:v2 src/.'
+      }
+   }
+
+    stage('Docker Login') {
+      steps {
+        sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+      }
     }
-        }
+   
+    stage('Docker Push') {
+     steps {
+       sh 'docker push brunosantos88/conversaotemperatura:v2'
+     }
+   }
+  
+  stage('Kubernetes Deployment') {
+	 steps {
+	    withKubeConfig([credentialsId: 'kubelogin']) {
+     sh ('kubectl create --namespace=devopselite')
+		 sh ('kubectl apply -f kube/deployment.yaml --namespace=devopselite')
+	}
+	     }
+  	}
 
-}
+      stage ('AGUARDAR 180s INSTALAÇAO OWSZAP'){
+	    steps {
+      sh 'pwd; sleep 180; echo "Application Has been deployed on K8S"'
+	   	}
+	    }
+	   
+
+ stage('OWSZAP PROXI BACKEND') {
+      steps {
+	    withKubeConfig([credentialsId: 'kubelogin']) {
+	    sh('zap.sh -cmd -quickurl http://$(kubectl get services/web --namespace=devopselite -o json| jq -r ".status.loadBalancer.ingress[] | .hostname") -quickprogress -quickout ${WORKSPACE}/zap_report.html')
+	    archiveArtifacts artifacts: 'zap_report.html'
+	    }
+	   }
+     } 
+
+  }
+  }
