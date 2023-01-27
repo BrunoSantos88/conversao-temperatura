@@ -10,13 +10,13 @@ resource "aws_eks_node_group" "public-nodes" {
 
   ami_type  = "AL2_x86_64"
   capacity_type  = "ON_DEMAND"
-  instance_types = ["t3.large"]
+  instance_types = ["t3.medium"]
   disk_size      = "50"
 
   scaling_config {
-    desired_size = 1
-    max_size     = 1
-    min_size     = 1
+    desired_size = 3
+    max_size     = 10
+    min_size     = 3
   }
 
   update_config {
