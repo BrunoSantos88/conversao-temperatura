@@ -5,7 +5,7 @@ sudo mv /tmp/eksctl /usr/local/bin
 sudo apt install default-jre -y 
 ##dependencias
 sudo apt install maven -y
-sudo apt  install docker.io -y
+sudo apt install docker.io -y
 sudo apt-get install jq -y
 sudo apt install git -y 
 sudo apt install wget -y

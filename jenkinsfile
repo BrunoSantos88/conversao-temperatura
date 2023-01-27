@@ -16,12 +16,12 @@ pipeline {
 //Stages.
   stages {   
 
-    stage('Slack Notification(Start)') {
-      steps {
-       slackSend message: 'Pipeline Inciada!. Necessidade de atenção, caso seja em Produção!'
-
-}
-}
+   // stage('Slack Notification(Start)') {
+   //   steps {
+      /// slackSend message: 'Pipeline Inciada!. Necessidade de atenção, caso seja em Produção!'
+//
+////}
+//}
 
   
 stage('GIT CLONE') {
