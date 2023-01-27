@@ -13,7 +13,7 @@ docker run -d -p  8080:8080 temperatura:v1
 Docker build 
 docker build -t temperatura:v1 src/.
 
-## docker TA
+## docker tag
 docker tag temperatura:v1 brunosantos88/conversaotemperatura:v1
 ## Docker Push
 docker push brunosantos88/conversaotemperatura:v1
