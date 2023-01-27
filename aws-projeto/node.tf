@@ -39,7 +39,7 @@ resource "aws_eks_node_group" "public-nodes" {
   ]
 
   capacity_type  = "ON_DEMAND"
-  instance_types = ["t3.small"]
+  instance_types = ["t3.medium"]
 
   scaling_config {
     desired_size = 1
@@ -55,11 +55,11 @@ resource "aws_eks_node_group" "public-nodes" {
     role = "general"
   }
 
-   //  taint {
-   //  key    = "team"
-    // value  = "devops"
-    // effect = "NO_SCHEDULE"
-   //}
+    taint {
+    key    = "team"
+     value  = "devops"
+     effect = "NO_SCHEDULE"
+   }
 
   launch_template {
     name    = aws_launch_template.eks-with-disks.name
