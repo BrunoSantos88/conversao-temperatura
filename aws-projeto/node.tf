@@ -24,13 +24,18 @@ resource "aws_eks_node_group" "public-nodes" {
   }
 
   labels = {
-        "node" = "Node*Master"
-        "app"  = "devopsElite"
-      }
+    role = "general"
+  }
 
     depends_on = [
     aws_iam_role_policy_attachment.nodes-AmazonEKSWorkerNodePolicy,
     aws_iam_role_policy_attachment.nodes-AmazonEKS_CNI_Policy,
     aws_iam_role_policy_attachment.nodes-AmazonEC2ContainerRegistryReadOnly,
   ]
+
+
+tags = {
+    Environment = "Devops_Elite"
+    Terraform   = "true"
+  }
 }
