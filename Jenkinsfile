@@ -11,7 +11,6 @@ pipeline {
         AWS_ACCESS_KEY_ID     = credentials('AWS_ACCESS_KEY_ID')
         AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
         DOCKERHUB_CREDENTIALS = credentials('dockerlogin')
-        SNYK_TOKEN = credentials('SNYK_TOKEN')
     }
 
 
@@ -25,11 +24,13 @@ stage('GIT CLONE') {
           }
   }
 
-  stage('snyk dependency scan') {
-      steps {
-        sh 'mvn snyk:test -fn'
-      }
-    }
+  stage('Synk-GateSonar-Security') {
+            steps {		
+				withCredentials([string(credentialsId: 'SNYK_TOKEN', variable: 'SNYK_TOKEN')]) {
+					sh 'mvn snyk:test -fn'
+				}
+			}
+}
   
 
   //Terraform
