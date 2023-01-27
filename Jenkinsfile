@@ -11,34 +11,19 @@ pipeline {
         AWS_ACCESS_KEY_ID     = credentials('AWS_ACCESS_KEY_ID')
         AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
         DOCKERHUB_CREDENTIALS = credentials('dockerlogin')
+        SNYK_TOKEN = credentials('SNYK_TOKEN')
     }
 
-//Stages.
-  stages {   
 
-   // stage('Slack Notification(Start)') {
-   //   steps {
-      /// slackSend message: 'Pipeline Inciada!. Necessidade de atenção, caso seja em Produção!'
-//
-////}
-//}
+stages {   
 
-  
 stage('GIT CLONE') {
   steps {
                 // Get code from a GitHub repository
     git url: 'https://github.com/BrunoSantos88/conversao-temperatura.git', branch: 'main',
+    credentialsId: 'devopselite'
           }
   }
-
-   stage('Slack Notification(Terraform Start Process)') {
-            steps {
-              slackSend message: 'Agora está iniciando processo de construção da infra-estrutura da AWS. O commando "terraform fmt" , vai atualizar somente oque foi alterado ou adicionado ao projeto!'
-                }
-          }
-
-
-
 
 
           ///Docker STEPS
@@ -84,23 +69,4 @@ stage('GIT CLONE') {
     }
         }
 
-
-//Email Notification
-      post {
-      always {
-         echo "Notifying build result by email"
-       }
-       success {
-           mail to: 'infratidevops@gmail.com',
-               subject: "SUCCESS: ${currentBuild.fullDisplayName}",
-              body: "Pipeline passou, Efetou com Sucesso"
-
-        }
-       failure {
-          mail to: 'infratidevops@gmail.com',
-               subject:"FAILURE: ${currentBuild.fullDisplayName}",
-               body: "Pipeline Falhou , verificar os parametros corretos!"
-       }
-       
-      }
 }
