@@ -25,29 +25,14 @@ stage('GIT CLONE') {
           }
   }
 
+  stage('snyk dependency scan') {
+      steps {
+        sh 'mvn snyk:test -fn'
+      }
+    }
+  
 
-          ///Docker STEPS
-   // stage('Docker Build') {
-   //   steps {
-   //    sh 'docker build -t brunosantos88/awssonarqube Sonarqube/.'
-   //   }
-   //}
-
-   // stage('Docker Login') {
-   //   steps {
-   //     sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
-   //   }
-   // }
-   
-   // stage('Docker Push') {
-   //  steps {
-   //    sh 'docker push brunosantos88/awssonarqube:latest'
-   //  }
- //  }
-
-//INFRA iS CODE
-
-
+  //Terraform
    stage('TF INICIAR') {
          steps {
            sh 'terraform init -reconfigure'
