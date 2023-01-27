@@ -24,57 +24,9 @@ resource "aws_eks_node_group" "public-nodes" {
   }
 
   labels = {
-    role = "general"
-  }
-
-eks_managed_node_groups = {
-    one = {
-      name           = "node-group-1"
-      instance_types = ["t2.small"]
-      min_size       = 1
-      max_size       = 1
-      desired_size   = 1
-      disk_size      = 30
-      labels = {
-        "node" = "node-group-1"
-        "app"  = "testing"
+        "node" = "Node*Master"
+        "app"  = "devopsElite"
       }
-      block_device_mappings = {
-      sdc = {
-        device_name = "/dev/sdc"
-        ebs = {
-          volume_size           = 50
-          volume_type           = "gp2"
-          delete_on_termination = false
-        }
-      }
-    }
-      disk_size = 30
-      pre_bootstrap_user_data = <<-EOT
-      echo 'DevOps- Because Developers Need Heroes'
-      EOT
-    }
-    two = {
-      name           = "node-group-2"
-      instance_types = ["t2.small"]
-      min_size       = 1
-      max_size       = 1
-      desired_size   = 1
-      disk_size      = 30
-      labels = {
-        "node" = "node-group-2"
-        "app"  = "testing"
-      }
-      pre_bootstrap_user_data = <<-EOT
-      echo 'foo bar'
-      EOT
-      taints  = [{
-        key = "dedicated"
-        value  = "testing"
-        effect = "NO_SCHEDULE"
-      }]
-    }
-  }
 
     depends_on = [
     aws_iam_role_policy_attachment.nodes-AmazonEKSWorkerNodePolicy,
