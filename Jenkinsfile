@@ -80,6 +80,7 @@ stage('GIT CLONE') {
   stage('Kubernetes Deployment') {
 	 steps {
 	   withKubeConfig([credentialsId: 'kubelogin']) {
+     sh ('kubectl create namespace devopselite')
 		 sh ('kubectl apply -f deployment.yaml --namespace=devopselite')
 	}
 	     }
