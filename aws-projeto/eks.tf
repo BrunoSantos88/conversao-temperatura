@@ -1,6 +1,5 @@
 resource "aws_eks_cluster" "demo" {
   name     = "devopselite"
- cluster_version = "1.23"
   role_arn = aws_iam_role.demo.arn
 
   vpc_config {
