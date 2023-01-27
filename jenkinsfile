@@ -27,7 +27,7 @@ pipeline {
 stage('GIT CLONE') {
   steps {
                 // Get code from a GitHub repository
-    git url: 'https://github.com/BrunoSantos88/-TechDay--Jenkins-Servidor-CI-CD.git', branch: 'main',
+    git url: 'https://github.com/BrunoSantos88/conversao-temperatura.git', branch: 'main',
     credentialsId: 'jenkins-server_local'
           }
   }
