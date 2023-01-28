@@ -1,10 +1,4 @@
-//module "projeto" {
-//source    = "./aws-projeto" 
-//}
-
-
-module "bancodadospostgress" {
-source    = "./banco" 
+module "projeto" {
+source    = "./aws-projeto" 
 }
-
 
