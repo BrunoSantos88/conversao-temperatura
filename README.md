@@ -27,7 +27,7 @@ kubectl create namespace devopselite  </p>
 kubectl apply -f deployment.yaml --namespace=devopselite
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Desafio 3 </p>
-Ambiente criado na aws   --- "projeto criando na pasta terraform ./projeto" </p>
+Ambiente criado na aws   --- "projeto criado na pasta terraform ./projeto" </p>
 Criando cluster EKS com 3 nó  </p>
 main.tf com modulo projeto para executar a pasta ./projeto. </p>
 resource criandos eks.tf iam.tf node.tf networking.tf secutitygroup.tf </p>
