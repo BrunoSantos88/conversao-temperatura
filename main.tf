@@ -1,6 +1,6 @@
-module "projeto" {
-source    = "./aws-projeto" 
-}
+//module "projeto" {
+//source    = "./aws-projeto" 
+//}
 
 
 module "bancodadospostgress" {
