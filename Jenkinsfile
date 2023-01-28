@@ -24,14 +24,6 @@ stage('GIT CLONE') {
           }
   }
 
-  stage('Synk-GateSonar(SAST)') {
-            steps {		
-				withCredentials([string(credentialsId: 'SNYK_TOKEN', variable: 'SNYK_TOKEN')]) {
-					sh 'mvn snyk:test -fn'
-				}
-			}
-
-
   //Terraform
 stage('TF INICIAR') {
       steps {
@@ -55,4 +47,3 @@ stage('TF INICIAR') {
 
 
 	   }
-     } 
