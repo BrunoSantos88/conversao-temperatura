@@ -37,7 +37,7 @@ Vm com Jenkins com seu proprio grupo de Segurança com 22 8081 para somente para
 Cluster EKS com acesso a porta 22 somente para o Jenkins Server acessar. </p>
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Desafio 4 </p>
-Projeto Jenkins esta em server ubnutu 20:04, foi criando um user jenkins com acesso " aplicaçoes docker terraform node maven git" e instalado dependencia "Kubectl e aws cli" foi rediecionado para porta 8081. </p>
+Projeto Jenkins esta em server ubnutu 20:04, foi criando um user jenkins com acesso " aplicaçoes docker terraform node maven git" e instalado dependencia "Kubectl e aws cli" foi redirecionado para porta 8081. </p>
 Jenkinfile esta com as Chaves "git dockerhub e file Kubeconfig e Snyk(teste SasT) e chaves AWS" </p>
 PARAMETROS:"GIT CLONE" "SAAS" "Docker build e Login e PUSH" "Terraform INIT FMT e APPLY" "KUBERNETES DEPLOYMENT" e "DAAST" no Services do deployment" </p>
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------
