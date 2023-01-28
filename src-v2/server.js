@@ -1,52 +1,55 @@
 const express = require('express');
-const os = require('os')
 const app = express();
-const swaggerUi = require('swagger-ui-express');
-const YAML = require('yamljs');
-const swaggerDocument = YAML.load('./swagger.yaml');
-const conversor = require('./convert')
-const bodyParser = require('body-parser');
-const config = require('./config/system-life');
+const models = require('./models/post')
+const bodyParser = require('body-parser')
+const promBundle = require("express-prom-bundle");
+const config = require('./system-life');
+const middlewares = require('./middleware')
 
+const metricsMiddleware = promBundle({
+    includeMethod: true, 
+    includePath: true, 
+    includeStatusCode: true, 
+    includeUp: true,
+    promClient: {
+        collectDefaultMetrics: {
+        }
+      }
+});
+
+app.use(middlewares.countRequests)
+app.use(metricsMiddleware)
 app.use(config.middlewares.healthMid);
 app.use('/', config.routers);
+app.use(express.static('static'));
 app.use(bodyParser.urlencoded({ extended: false }))
 app.set('view engine', 'ejs');
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument)); 
 
-app.get('/fahrenheit/:valor/celsius', (req, res) => {
 
-    let valor = req.params.valor;
-    let celsius = conversor.fahrenheitCelsius(valor);
-    res.json({ "celsius": celsius, "maquina": os.hostname() });
+app.get('/post', (req, res) => {
+    res.render('edit-news');
 });
 
-app.get('/celsius/:valor/fahrenheit', (req, res) => {
+app.post('/post', (req, res) => {
 
-    let valor = req.params.valor;
-    let fahrenheit = conversor.celsiusFahrenheit(valor);
-    res.json({ "fahrenheit": fahrenheit, "maquina": os.hostname() });
+    models.Post.create({title: req.body.title, content: req.body.description, summary: req.body.resumo, publishDate: Date.now()});
+    res.redirect('/');
 });
 
-app.get('/', (req, res) => {
+app.get('/post/:id', async (req, res) => {
 
-    res.render('index',{valorConvertido: ''});
+    const post = await models.Post.findByPk(req.params.id);
+    res.render('view-news',{post: post});
 });
 
-app.post('/', (req, res) => {
-    let resultado = '';
 
-    if (req.body.valorRef) {
-        if (req.body.selectTemp == 1) {
-            resultado = conversor.celsiusFahrenheit(req.body.valorRef)
-        } else {
-            resultado = conversor.fahrenheitCelsius(req.body.valorRef)
-        }
-    }
+app.get('/', async (req, res) => {
 
-    res.render('index', {valorConvertido: resultado});
- });
-
-app.listen(8080, () => {
-    console.log("Servidor rodando na porta 8080");
+    const posts = await models.Post.findAll();
+    res.render('index',{posts: posts});
 });
+
+models.initDatabase();
+app.listen(8080);
+
+console.log('Aplicação rodando na porta 8080');
