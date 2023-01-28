@@ -23,7 +23,7 @@ Desafio 2 </p>
 
 -Criado pasta src-v2 </p>
 -Criado cluster EKS AWS 3 nó. </p>
--Commando Kubeclt </p>
+Commando add Kubectl </p>
 kubectl create namespace devopselite  </p>
 kubectl apply -f deployment.yaml --namespace=devopselite
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
