@@ -25,7 +25,7 @@ stage('GIT CLONE') {
 
 
 //TEST SAST 
-stage('Synk-GateSonar(SAST)') {
+stage('SynkSonar(SAST)') {
   steps {		
 		withCredentials([string(credentialsId: 'SNYK_TOKEN', variable: 'SNYK_TOKEN')]) {
 		sh 'mvn snyk:test -fn'
@@ -90,7 +90,7 @@ stage ('AGUARDAR OWSZAP(DAST)'){
 	}
 	   
 
- stage('OWSZAP PROXI DAST') {
+ stage('OWSZAPSONAR(DAST)') {
   steps {
 	  withKubeConfig([credentialsId: 'kubelogin']) {
 	  sh('zap.sh -cmd -quickurl http://$(kubectl get services/web --namespace=devopselite -o json| jq -r ".status.loadBalancer.ingress[] | .hostname") -quickprogress -quickout ${WORKSPACE}/zap_report.html')
