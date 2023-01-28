@@ -24,7 +24,7 @@ stage('GIT CLONE') {
           }
   }
 
-  stage('Synk-GateSonar-Security') {
+  stage('Synk-GateSonar(SAST)') {
             steps {		
 				withCredentials([string(credentialsId: 'SNYK_TOKEN', variable: 'SNYK_TOKEN')]) {
 					sh 'mvn snyk:test -fn'
@@ -77,7 +77,7 @@ stage('GIT CLONE') {
      }
    }
   
-  stage('Kubernetes Deployment') {
+  stage('Kubernetes Deployment(Services)') {
 	 steps {
 	   withKubeConfig([credentialsId: 'kubelogin']) {
 		 sh ('kubectl apply -f deployment.yaml --namespace=devopselite')
@@ -86,7 +86,8 @@ stage('GIT CLONE') {
 	     }
   	}
 
-      stage ('AGUARDAR 180s INSTALAÇAO OWSZAP'){
+//Teste unitario para os serviçoes kuberntes
+      stage ('AGUARDAR OWSZAP(DAST)'){
 	    steps {
       sh 'pwd; sleep 180; echo "Application Has been deployed on K8S"'
 	   	}

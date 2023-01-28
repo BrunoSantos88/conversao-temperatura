@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: web
-          image: brunosantos88/conversaotemperatura:v2
+          image: brunosantos88/conversaotemperatura:v1
           ports:
           - containerPort: 8080
           env:
