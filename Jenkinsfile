@@ -24,7 +24,7 @@ stage('GIT CLONE') {
           }
   }
 
-  //Terraform
+//Terraform
 stage('TF INICIAR') {
       steps {
            sh 'terraform init -reconfigure'
@@ -39,11 +39,13 @@ stage('TF INICIAR') {
         }
       }
 
-      stage('TF Apply') {
-       sh 'terraform apply -auto-approve'
+      stage('TF DESTROY') {
+         steps {
+       sh 'terraform destroy -auto-approve'
           }
     }
 
 
+}
 
 	   }
