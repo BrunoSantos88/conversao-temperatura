@@ -28,7 +28,7 @@ resource "aws_security_group" "sg-networking" {
   ingress {
     from_port   = "5432"
     to_port     = "5432"
-    protocol    = "tcp"
+    protocol    = "postgres"
     cidr_blocks = ["0.0.0.0/0"]
   }
 
