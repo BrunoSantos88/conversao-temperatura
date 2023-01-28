@@ -61,7 +61,7 @@ stage('GIT CLONE') {
 ///Docker STEPS
     stage('Docker Build') {
       steps {
-        sh 'docker build -t brunosantos88/conversaotemperatura:v2 src/.'
+        sh 'docker build -t brunosantos88/conversaotemperatura:v2 src-v2/.'
       }
    }
 
@@ -82,6 +82,7 @@ stage('GIT CLONE') {
 	   withKubeConfig([credentialsId: 'kubelogin']) {
      sh ('kubectl create namespace devopselite')
 		 sh ('kubectl apply -f deployment.yaml --namespace=devopselite')
+     sh ('kubectl apply -f servicedb.yaml --namespace=devopselite')
 	}
 	     }
   	}
@@ -93,10 +94,19 @@ stage('GIT CLONE') {
 	    }
 	   
 
- stage('OWSZAP PROXI BACKEND') {
+ stage('OWSZAP PROXI APP') {
       steps {
 	    withKubeConfig([credentialsId: 'kubelogin']) {
 	    sh('zap.sh -cmd -quickurl http://$(kubectl get services/web --namespace=devopselite -o json| jq -r ".status.loadBalancer.ingress[] | .hostname") -quickprogress -quickout ${WORKSPACE}/zap_report.html')
+	    archiveArtifacts artifacts: 'zap_report.html'
+	    }
+	   }
+     } 
+
+      stage('OWSZAP PROXI BANCO') {
+      steps {
+	    withKubeConfig([credentialsId: 'kubelogin']) {
+	    sh('zap.sh -cmd -quickurl http://$(kubectl get services/postgre --namespace=devopselite -o json| jq -r ".status.loadBalancer.ingress[] | .hostname") -quickprogress -quickout ${WORKSPACE}/zap_report.html')
 	    archiveArtifacts artifacts: 'zap_report.html'
 	    }
 	   }

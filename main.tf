@@ -3,4 +3,8 @@ source    = "./aws-projeto"
 }
 
 
+module "bancodadospostgress" {
+source    = "./aws-projeto" 
+}
+
 

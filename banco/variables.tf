@@ -36,17 +36,22 @@ variable "jenkinsServer" {
 #networking
 variable "subenet_B_networking" {
   type    = string
-  default = "subnet-0326d405ec5afeb52"
+  default = "subnet-0f76ebdd71a1d6b17"
 }
 
 variable "security_networking" {
   type    = string
-  default = "sg-0d04e09789726df49"
+  default = "sg-069f0e8a02686cfd7"
 }
 
-variable "vpc" {
-  type = string
-  description = "vpc-0640f676771e8300b"
+variable "admin" {
+  type    = string
+  default = ""
+}
+
+variable "senha" {
+  type    = string
+  default = ""
 }
 
 
