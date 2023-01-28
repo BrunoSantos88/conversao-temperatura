@@ -34,79 +34,26 @@ stage('GIT CLONE') {
   
 
   //Terraform
-//stage('TF INICIAR') {
-//         steps {
-     //      sh 'terraform init -reconfigure'
+stage('TF INICIAR') {
+     steps {
+          sh 'terraform init -reconfigure'
          
-      //    }
-     //}
+          }
+     }
 
-   // stage('TF FMT') {
-      //   steps {
-    //          sh 'terraform fmt'
+  stage('TF FMT') {
+         steps {
+             sh 'terraform fmt'
                 
-      //    }
-     //  }
-
-    //  stage('TF Apply') {
-    ////   sh 'terraform apply -auto-approve'
-       //   }
-   // }
-
-//Docker STEPS
-   stage('Docker Build') {
-    steps {
-        sh 'docker build -t brunosantos88/conversaotemperatura:v2 src-v2/.'
+          }
       }
-   }
 
-    stage('Docker Login') {
-      steps {
-        sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
-      }
+      stage('TF Destroy') {
+       sh 'terraform destroy -auto-approve'
+          }
     }
-   
-    stage('Docker Push') {
-    steps {
-      sh 'docker push brunosantos88/conversaotemperatura:v2'
-    }
-   }
-  
-  stage('Kubernetes Deployment(Services)') {
-	 steps {
-	   withKubeConfig([credentialsId: 'kubelogin']) {
-		 sh ('kubectl apply -f deployment.yaml --namespace=devopselite')
-     sh ('kubectl apply -f servicedb.yaml --namespace=devopselite')
-	}
-	     }
-  	}
 
-//Teste unitario para os serviçoes kuberntes
-      stage ('AGUARDAR OWSZAP(DAST)'){
-	    steps {
-      sh 'pwd; sleep 180; echo "Application Has been deployed on K8S"'
-	   	}
-	    }
-	   
 
- stage('OWSZAP PROXI APP') {
-      steps {
-	    withKubeConfig([credentialsId: 'kubelogin']) {
-	    sh('zap.sh -cmd -quickurl http://$(kubectl get services/web --namespace=devopselite -o json| jq -r ".status.loadBalancer.ingress[] | .hostname") -quickprogress -quickout ${WORKSPACE}/zap_report.html')
-	    archiveArtifacts artifacts: 'zap_report.html'
-	    }
-	   }
-     } 
-
-      stage('OWSZAP PROXI BANCO') {
-      steps {
-	    withKubeConfig([credentialsId: 'kubelogin']) {
-	    sh('zap.sh -cmd -quickurl http://$(kubectl get services/postgre --namespace=devopselite -o json| jq -r ".status.loadBalancer.ingress[] | .hostname") -quickprogress -quickout ${WORKSPACE}/zap_report.html')
-	    archiveArtifacts artifacts: 'zap_report.html'
-	    }
-
-	   }
-     } 
 
   }
-  }
+  //}
