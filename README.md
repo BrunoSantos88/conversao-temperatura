@@ -20,7 +20,7 @@ docker tag temperatura:v1 brunosantos88/conversaotemperatura:v1
 -Docker Push
 docker push brunosantos88/conversaotemperatura:v1
 ---------------------------------------------------------------------------------------
-Desafio 2
+Desafio 2 </p>
 Criado pasta src-v2
 Criando cluster EKS AWS 3 nó.
 kubectl create namespace devopselite
