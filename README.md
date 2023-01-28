@@ -10,6 +10,7 @@ A aplicação é exposta usando a porta 8080
 docker run -d -p  8080:8080 temperatura:v1
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Desafio 1 </p>
+-Criado pasta src-v1 </p> "referente ao projeto docker"
 -Comandos add  </p>
 -Docker build : 
 docker build -t temperatura:v1 src/. </p>
@@ -19,7 +20,7 @@ docker tag temperatura:v1 brunosantos88/conversaotemperatura:v1 </p>
 docker push brunosantos88/conversaotemperatura:v1
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Desafio 2 </p>
--Criado pasta src-v2 </p>
+-Criado pasta src-v2 </p> "referente ao projeto kubernetes"
 -Criado cluster EKS AWS 3 nó. </p>
 Commando add Kubectl </p>
 kubectl create namespace devopselite  </p>
