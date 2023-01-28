@@ -2,14 +2,6 @@ resource "aws_security_group" "sg-networking" {
   name = "networking-sg"
   vpc_id = aws_vpc.networking.id
   
-  ingress {
-    from_port   = "8081"
-    to_port     = "8081"
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-
 ####datadog TCP
    ingress {
     from_port   = "8125"
@@ -29,13 +21,6 @@ resource "aws_security_group" "sg-networking" {
     from_port   = "5432"
     to_port     = "5432"
     protocol    = "postgres"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  ingress {
-    from_port   = "9000"
-    to_port     = "9000"
-    protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
 
@@ -86,7 +71,7 @@ resource "aws_security_group" "sg-networking" {
     from_port   = "22"
     to_port     = "22"
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = [aws_security_group.jkins-networking.id]
   }
   
   egress {
