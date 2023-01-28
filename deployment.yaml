@@ -25,7 +25,7 @@ spec:
             - name: DB_PASSWORD
               value: "Pg#kubenews"
             - name: DB_HOST
-              value: "postgres"
+              value: "postgre"
 ---
 apiVersion: v1
 kind: Service
