@@ -27,3 +27,4 @@ Criado pasta src-v2
 Criando cluster EKS AWS 3 nó.
 kubectl create namespace devopselite
 kubectl apply -f  deployment.yaml --namespace=devopselite
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------
