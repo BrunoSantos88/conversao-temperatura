@@ -3,8 +3,5 @@ kind: Service
 metadata:
   name: postgre
 spec:
-  selector:
-    app: postgre
-  ports:
-    - port: 5432
-  type: ClusterIP
+  type: ExternalName
+  ExternalName: kubenews.cghgqbvfm4sf.us-east-1.rds.amazonaws.com

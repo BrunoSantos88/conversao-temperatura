@@ -23,7 +23,7 @@ spec:
             - name: DB_USERNAME
               value: "kubenews"
             - name: DB_PASSWORD
-              value: "Pg#123"
+              value: "Pg#kubenews"
             - name: DB_HOST
               value: "postgre"
 ---
