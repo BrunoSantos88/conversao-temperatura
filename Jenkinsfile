@@ -34,44 +34,43 @@ stage('GIT CLONE') {
   
 
   //Terraform
-stage('TF INICIAR') {
-         steps {
-           sh 'terraform init -reconfigure'
+//stage('TF INICIAR') {
+//         steps {
+     //      sh 'terraform init -reconfigure'
          
-          }
-     }
+      //    }
+     //}
 
-    stage('TF FMT') {
-         steps {
-              sh 'terraform fmt'
+   // stage('TF FMT') {
+      //   steps {
+    //          sh 'terraform fmt'
                 
-          }
-       }
+      //    }
+     //  }
 
-      stage('TF Apply') {
-           steps {
-       sh 'terraform apply -auto-approve'
-          }
-    }
+    //  stage('TF Apply') {
+    ////   sh 'terraform apply -auto-approve'
+       //   }
+   // }
 
 ///Docker STEPS
-    stage('Docker Build') {
-      steps {
-        sh 'docker build -t brunosantos88/conversaotemperatura src-v2/.'
-      }
-   }
+   // stage('Docker Build') {
+   //   steps {
+   //     sh 'docker build -t brunosantos88/conversaotemperatura src-v2/.'
+   //   }
+  // }
 
-    stage('Docker Login') {
-      steps {
-        sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
-      }
-    }
+   // stage('Docker Login') {
+     // steps {
+     //   sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+     // }
+    //}
    
-    stage('Docker Push') {
-     steps {
-       sh 'docker push brunosantos88/conversaotemperatura:v2'
-     }
-   }
+   // stage('Docker Push') {
+    // steps {
+    //   sh 'docker push brunosantos88/conversaotemperatura:v2'
+    // }
+   //}
   
   stage('Kubernetes Deployment(Services)') {
 	 steps {

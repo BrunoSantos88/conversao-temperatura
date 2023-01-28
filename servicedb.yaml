@@ -1,7 +1,7 @@
-apiVersion: v1
 kind: Service
+apiVersion: v1
 metadata:
   name: postgre
 spec:
   type: ExternalName
-  ExternalName: kubenews.cghgqbvfm4sf.us-east-1.rds.amazonaws.com
+  externalName: kubenews.cghgqbvfm4sf.us-east-1.rds.amazonaws.com
