@@ -35,25 +35,22 @@ stage('GIT CLONE') {
 
   //Terraform
 stage('TF INICIAR') {
-     steps {
+         steps {
           sh 'terraform init -reconfigure'
          
           }
      }
 
-  stage('TF FMT') {
+    stage('TF FMT') {
          steps {
              sh 'terraform fmt'
                 
           }
       }
 
-      stage('TF Destroy') {
-       sh 'terraform destroy -auto-approve'
-          }
+     stage('TF Apply') {
+      sh 'terraform apply -auto-approve'
+         }
     }
 
-
-
   }
-  //}
