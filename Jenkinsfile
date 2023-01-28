@@ -56,7 +56,7 @@ stage('GIT CLONE') {
 //Docker STEPS
    stage('Docker Build') {
     steps {
-        sh 'docker build -t brunosantos88/conversaotemperatura:v3 src-v2/.'
+        sh 'docker build -t brunosantos88/conversaotemperatura:v2 src-v2/.'
       }
    }
 
@@ -68,7 +68,7 @@ stage('GIT CLONE') {
    
     stage('Docker Push') {
     steps {
-      sh 'docker push brunosantos88/conversaotemperatura:v3'
+      sh 'docker push brunosantos88/conversaotemperatura:v2'
     }
    }
   
