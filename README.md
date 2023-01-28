@@ -16,7 +16,6 @@ Desafio 1 </p>
 -Comandos add
 Docker build 
 docker build -t temperatura:v1 src/.
-
 -Docker tag
 docker tag temperatura:v1 brunosantos88/conversaotemperatura:v1
 -Docker Push
