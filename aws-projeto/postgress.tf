@@ -4,7 +4,7 @@ resource "aws_db_instance" "postgress" {
   allocated_storage         = 50
   availability_zone         = "us-east-1b"
   engine                    = "postgres"
-  engine_version            = "15.0"
+  engine_version            = "14.1"
   db_subnet_group_name      = aws_db_subnet_group.networkinsdb.id
   vpc_security_group_ids    = []
   name                      = "kubenews"
