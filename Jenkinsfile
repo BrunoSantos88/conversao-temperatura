@@ -30,27 +30,29 @@ stage('GIT CLONE') {
 					sh 'mvn snyk:test -fn'
 				}
 			}
-}
-  
+
 
   //Terraform
 stage('TF INICIAR') {
-         steps {
-          sh 'terraform init -reconfigure'
+      steps {
+           sh 'terraform init -reconfigure'
          
           }
      }
 
     stage('TF FMT') {
          steps {
-             sh 'terraform fmt'
+       sh 'terraform fmt'
                 
-          }
+        }
       }
 
-     stage('TF Apply') {
-      sh 'terraform apply -auto-approve'
-         }
+      stage('TF Apply') {
+       sh 'terraform apply -auto-approve'
+          }
     }
 
-  }
+
+
+	   }
+     } 
