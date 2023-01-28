@@ -12,7 +12,7 @@ docker run -d -p  8080:8080 temperatura:v1
 Desafio 1 </p>
 
 -Comandos add  </p>
-Docker build : 
+-Docker build : 
 docker build -t temperatura:v1 src/. </p>
 -Docker tag :
 docker tag temperatura:v1 brunosantos88/conversaotemperatura:v1 </p>
@@ -20,8 +20,9 @@ docker tag temperatura:v1 brunosantos88/conversaotemperatura:v1 </p>
 docker push brunosantos88/conversaotemperatura:v1
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Desafio 2 </p>
-Criado pasta src-v2 </p>
-Criado cluster EKS AWS 3 nó. </p>
-kubectl create namespace devopselite
-kubectl apply -f deployment.yaml --namespace=devopselite
+-Criado pasta src-v2 </p>
+-Criado cluster EKS AWS 3 nó. </p>
+-Commando Kubeclt :
+-kubectl create namespace devopselite
+-kubectl apply -f deployment.yaml --namespace=devopselite
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
