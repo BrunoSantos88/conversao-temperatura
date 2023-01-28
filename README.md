@@ -12,11 +12,11 @@ docker run -d -p  8080:8080 temperatura:v1
 Desafio 1 </p>
 
 -Comandos add  </p>
-Docker build 
+Docker build : 
 docker build -t temperatura:v1 src/. </p>
--Docker tag
+-Docker tag :
 docker tag temperatura:v1 brunosantos88/conversaotemperatura:v1 </p>
--Docker Push </p>
+-Docker Push :
 docker push brunosantos88/conversaotemperatura:v1
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Desafio 2 </p>
