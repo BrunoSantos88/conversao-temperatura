@@ -24,7 +24,7 @@ credentialsId: 'aws-developer'
           }
 }
 
-stage('Sonar(SNYK)SAST') {
+stage('SONAR-SNYK(SAST)') {
             steps {		
 				withCredentials([string(credentialsId: 'SNYK_TOKEN', variable: 'SNYK_TOKEN')]) {
 					sh 'mvn snyk:test -fn'
@@ -36,10 +36,13 @@ stage('Sonar(SNYK)SAST') {
 stage('Kubernetes Deployment(Services)') {
 	steps {
 	  withKubeConfig([credentialsId: 'kubelogin']) {
-    sh ('kubectl create namespace devopselite ')
-	sh ('kubectl apply -f deployment.yaml --namespace=devopselite ')
-    sh ('kubectl apply -f grafana.yaml')
-	sh ('kubectl apply -f prometheus.yaml')
+    sh ('kubectl delete -f grafana.yaml')
+	sh ('kubectl delete -f prometheus.yaml')
+	sh ('kubectl apply -f clusterRole.yaml')
+    sh ('kubectl apply -f config-map.yaml')
+	sh ('kubectl apply -f prometheus-deployment.yaml')
+	sh ('kubectl apply -f prometheus-service.yaml')
+	
 	}
 	}
   }
@@ -53,7 +56,7 @@ stage ('AGUARDAR OWSZAP(DAST)'){
 	}
 	   
 
- stage('OWSZAPSONAR(DAST)') {
+ stage('SONAR-OWSZAP(DAST)') {
   steps {
 	  withKubeConfig([credentialsId: 'kubelogin']) {
 	  sh('zap.sh -cmd -quickurl http://$(kubectl get services/web -o json| jq -r ".status.loadBalancer.ingress[] | .hostname") -quickprogress -quickout ${WORKSPACE}/zap_report.html')
