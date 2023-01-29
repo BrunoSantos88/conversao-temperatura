@@ -36,7 +36,7 @@ stage('Sonar(SNYK)SAST') {
 stage('Kubernetes Deployment(Services)') {
 	steps {
 	  withKubeConfig([credentialsId: 'kubelogin']) {
-    sh ('kubectl apply -f create namespace devopselite ')
+    sh ('kubectl create namespace devopselite ')
 	sh ('kubectl apply -f deployment.yaml --namespace=devopselite ')
     sh ('kubectl apply -f grafana.yaml')
 	sh ('kubectl apply -f prometheus.yaml')
