@@ -30,14 +30,14 @@ Desafio 3 </p>
 Ambiente criado na aws   --- "projeto criado na pasta terraform ./projeto" </p>
 Criando cluster EKS com 3 nó  </p>
 main.tf com modulo projeto para executar a pasta ./projeto. </p>
-resource criandos eks.tf iam.tf node.tf networking.tf secutitygroup.tf </p>
+resource criando o cluster no arquivo eks.tf iam.tf node.tf networking.tf secutitygroup.tf </p>
 Cluster Eks e Node e suas permiçoes no IAM. Networking e IGW CIDR 172.0.0.0/16 e Subnets "172.0.1.0/24 172.0.2.0/24 172.0.3.0/24" </p>
 grupo de segurança com as portas necessarias 80 22 8080 5432 para EKS. Node Group esta default. </p>
 Vm com Jenkins com seu proprio grupo de Segurança com 22 8081 para somente para meu IP acessar. </p>
 Cluster EKS com acesso a porta 22 somente para o Jenkins Server acessar. </p>
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Desafio 4 </p>
-Projeto Jenkins esta em server ubnutu 20:04, foi criando um user jenkins com acesso " aplicaçoes docker terraform node maven git" e instalado dependencia "Kubectl e aws cli" foi rediecionado para porta 8081. </p>
+Projeto Jenkins esta em server ubnutu 20:04, foi criando um user jenkins com acesso " aplicaçoes docker terraform node maven git" e instalado dependencia "Kubectl e aws cli" foi redirecionado para porta 8081. </p>
 Jenkinfile esta com as Chaves "git dockerhub e file Kubeconfig e Snyk(teste SasT) e chaves AWS" </p>
 PARAMETROS:"GIT CLONE" "SAAS" "Docker build e Login e PUSH" "Terraform INIT FMT e APPLY" "KUBERNETES DEPLOYMENT" e "DAAST" no Services do deployment" </p>
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------
