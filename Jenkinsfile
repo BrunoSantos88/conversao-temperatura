@@ -36,8 +36,6 @@ stage('SONAR-SNYK(SAST)') {
 stage('Kubernetes Deployment(Services)') {
 	steps {
 	  withKubeConfig([credentialsId: 'kubelogin']) {
-    sh ('kubectl delete -f grafana.yaml')
-	sh ('kubectl delete -f prometheus.yaml')
 	sh ('kubectl apply -f clusterRole.yaml')
     sh ('kubectl apply -f config-map.yaml')
 	sh ('kubectl apply -f prometheus-deployment.yaml')
